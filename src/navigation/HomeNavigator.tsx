@@ -1,41 +1,96 @@
+import React from 'react';
 import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
-import TelaPrincipal from "../layouts/TelaPrincipal";
+import LobbyScreen from "../layouts/Lobby";
+import Login from '../layouts/Login';
+import Menu from '../layouts/Menu';
 
-//Define quais as telas e os parâmetros de cada tela
-type RootStackParamList = {
-  TelaPrincipal: undefined; 
-  
+import CadastroDeServico from '../layouts/CadastroDeServiço';
+import ClienteCadastro from "../layouts/ClienteCadastro";
+import AnimalCadastro from '../layouts/AnimalCadastro';
+import CadastroProduto from '../layouts/CadastroProduto';
+
+import TelaGerenciamentoClientes from '../layouts/GerenciamentoDeClientes';
+import GerenciamentoDeAnimais from '../layouts/GerenciamentoDeAnimais';
+import GerenciamentoDeServicos from '../layouts/GerenciamentoDeServicos';
+
+import AlterarClientes from '../layouts/AlterarClientes';
+import AlterarAnimais from '../layouts/AlterarAnimais';
+import AlterarServicos from '../layouts/AlterarServicos';
+
+import { Cliente } from '../types/Cliente';
+import { Animal } from '../types/Animal';
+import { Servico } from '../types/Servico'; // ⬅️ Adicione isso
+
+// ✅ Tipagem dos parâmetros da navegação
+export type RootStackParamList = {
+  Lobby: undefined;
+  ClienteCadastro: undefined;
+  Login: undefined;
+  Menu: { clienteId: string };
+  CadastroDeServico: { clienteId: string };
+  CadastroProduto: { clienteId: string };
+  AnimalCadastro: { clienteId: string };
+  GerenciamentoClientes: undefined;
+  GerenciamentoDeAnimais: undefined;
+  GerenciamentoDeServicos: undefined;
+  AlterarClientes: { cliente: Cliente };
+  AlterarAnimais: { animal: Animal };
+  AlterarServicos: { servico: Servico };
+
 };
 
-//Cria a Stack (tipo de navegação onde as telas estão em uma "pilha")
-//com o RootStackParamList definindo as telas da stack
+// ✅ Criando o navegador
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-//Cria o navegador da pilha
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="TelaPrincipal" //nome da tela inicial
-      screenOptions={{ headerShown: false }} //headerShown define se o cabeçalho irá ser exibido
-    >
-
-      {/* define uma te la dando um nome(igual ao RootStackParamList) e qual o componente será carregado */}
-      <Stack.Screen name="TelaPrincipal" component={TelaPrincipal} />
+    <Stack.Navigator initialRouteName="Lobby" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Lobby" component={LobbyScreen} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Menu" component={Menu} />
+      <Stack.Screen name="CadastroDeServico" component={CadastroDeServico} />
+      <Stack.Screen name="CadastroProduto" component={CadastroProduto} />
+      <Stack.Screen name="ClienteCadastro" component={ClienteCadastro} />
+      <Stack.Screen name="AnimalCadastro" component={AnimalCadastro} />
+      <Stack.Screen name="GerenciamentoClientes" component={TelaGerenciamentoClientes} />
+      <Stack.Screen name="GerenciamentoDeAnimais" component={GerenciamentoDeAnimais} />
+      <Stack.Screen name="GerenciamentoDeServicos" component={GerenciamentoDeServicos} />
+      <Stack.Screen name="AlterarClientes" component={AlterarClientes} />
+      <Stack.Screen name="AlterarAnimais" component={AlterarAnimais} />
+      <Stack.Screen name="AlterarServicos" component={AlterarServicos} />
 
     </Stack.Navigator>
   );
-}
+};
 
-//cria as propriedades da TelaPrincipal, que nesse caso é undefined
-//essas propriedades são usadas lá em layouts/TelaPincipal.tsx
-type PrincipalProps = NativeStackScreenProps<RootStackParamList,
-  'TelaPrincipal'>;
-
-
-//exporta o navegador da pilha para ficar visível para outros arquivos    
+// ✅ Tipos de props para cada tela (opcional, mas útil)
+type LobbyProps = NativeStackScreenProps<RootStackParamList, 'Lobby'>;
+type CadClientePropsNav = NativeStackScreenProps<RootStackParamList, 'ClienteCadastro'>;
+type LoginPropsNav = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type MenuPropsNav = NativeStackScreenProps<RootStackParamList, 'Menu'>;
+type CadDeServicoNav = NativeStackScreenProps<RootStackParamList, 'CadastroDeServico'>;
+type AnimalCadPropsNav = NativeStackScreenProps<RootStackParamList, 'AnimalCadastro'>;
+type GerenciamentoClientesPropsNav = NativeStackScreenProps<RootStackParamList, 'GerenciamentoClientes'>;
+type AlterarClientesPropsNav = NativeStackScreenProps<RootStackParamList, 'AlterarClientes'>;
+type CadastroProdutoPropsNav = NativeStackScreenProps<RootStackParamList, 'CadastroProduto'>;
+type GerenciamentoAnimaisPropsNav = NativeStackScreenProps<RootStackParamList, 'GerenciamentoDeAnimais'>;
+type GerenciamentoServicosPropsNav = NativeStackScreenProps<RootStackParamList, 'GerenciamentoDeServicos'>;
+type AlterarAnimaisPropsNav = NativeStackScreenProps<RootStackParamList, 'AlterarAnimais'>;
+type AlterarServicosPropsNav = NativeStackScreenProps<RootStackParamList, 'AlterarServicos'>;
 export default HomeNavigator;
 
-//exporta os tipos de dados para ficar visível para outros arquivos
 export type {
-  PrincipalProps
+  LobbyProps,
+  CadClientePropsNav,
+  LoginPropsNav,
+  MenuPropsNav,
+  CadDeServicoNav,
+  AnimalCadPropsNav,
+  GerenciamentoClientesPropsNav,
+  GerenciamentoAnimaisPropsNav,
+  GerenciamentoServicosPropsNav,
+  AlterarClientesPropsNav,
+  CadastroProdutoPropsNav,
+  AlterarAnimaisPropsNav,
+  AlterarServicosPropsNav,
 };

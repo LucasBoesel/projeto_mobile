@@ -1,0 +1,20 @@
+{
+    "Componentes React Native": {
+        "scope": "javascriptreact,typescriptreact",
+        "prefix": "componente",
+        "body": [
+            "import React from 'react';",  
+            "import {Text} from 'react-native';",
+            "import { styles } from '../styles/styles';",
+            "",
+            "const SeuComponente = () => {",
+            "   return ( ",
+            "       <Text style={styles.titulo1}> SuaMensagem! </Text>",
+            "   )",
+            "};",
+            "",
+            "export default SeuComponente;"
+        ],
+        "description": "Componente base no React Native"
+    }
+}
